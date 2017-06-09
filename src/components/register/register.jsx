@@ -40,55 +40,72 @@ class Register extends Component {
     }
 
     render() {
+
+        if (this.props.redirectToLogin) {
+            return (<Redirect to="/auth"/>)
+        }
+
         return (
-            <div>
-                <h2>User <small>Register</small></h2>
-                <div className="panel panel-default">
-                    <div className="panel-body">
-                        <div role="form" className="user-form">
+            <div className="login">
+                <div className="jumbotron">
+                    <div className="container">
 
-                            <div className="col-md-offset-4 col-md-4">
-                                <input id="name" className="form-control" placeholder="Name *" value={this.props.name}
-                                       onChange={this.props.onNameChanged}></input>
-                            </div>
-                            <div className="col-md-8"></div>
-                            <div className="col-md-offset-4 col-md-4">
-                                <input id="email" className="form-control" placeholder="Email *" value={this.props.email}
-                                       onChange={this.props.onEmailChanged}></input>
-                            </div>
-                            <div className="col-md-8"></div>
-                            <div className="col-md-offset-4 col-md-4">
-                                <input id="password" type="password" className="form-control" placeholder="Password *" value={this.props.password}
-                                       onChange={this.props.onPasswordChanged}></input>
-                            </div>
-                            <div className="col-md-offset-4 col-md-2">
-                                <button className="btn btn-primary" onClick={this.clickHandler}>
-                                    <i className="fa fa-plus">Register</i>
-                                </button>
-                            </div>
-
+                        <div className="col-md-offset-4">
+                            <h3>Time Manager <small>Register</small></h3>
                         </div>
 
+                        <form className="form-horizontal">
+
+                            <div className="form-group">
+                                <div className="col-md-offset-4 col-md-4">
+                                    <input id="name" className="form-control" placeholder="Name *" value={this.props.name}
+                                           onChange={this.props.onNameChanged}></input>
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+                                <div className="col-md-offset-4 col-md-4">
+                                    <input id="email" className="form-control" placeholder="Email *" value={this.props.email}
+                                           onChange={this.props.onEmailChanged}></input>
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+                                <div className="col-md-offset-4 col-md-4">
+                                    <input id="password" type="password" className="form-control" placeholder="Password *" value={this.props.password}
+                                           onChange={this.props.onPasswordChanged}></input>
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+                                <div className="col-md-offset-4 col-md-2">
+                                    <button type="button" onClick={this.clickHandler} className="btn btn-primary">Register</button>
+                                </div>
+                                <div className="col-md-2">
+                                    <a type="button" href="#/auth" className="btn btn-success pull-right">Go to Login</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
         )
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     name: state.register.name,
     email: state.register.email,
     password: state.register.password,
-    redirectToList: state.userCreate.redirectToList
+    redirectToLogin: state.register.redirectToLogin
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    onCreate,
+    register,
     onNameChanged,
     onEmailChanged,
-    onPasswordChanged,
-    onRoleChanged
+    onPasswordChanged
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

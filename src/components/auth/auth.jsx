@@ -68,7 +68,7 @@ class Auth extends Component {
                                     <button type="button" onClick={this.clickHandler} className="btn btn-primary">Sign in</button>
                                 </div>
                                 <div className="col-md-2">
-                                    <button type="button" href="#/register" className="btn btn-success pull-right">Sign up</button>
+                                    <a type="button" href="#/register" className="btn btn-success pull-right">Sign up</a>
                                 </div>
                             </div>
                         </form>

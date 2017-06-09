@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toastr } from 'react-redux-toastr'
 
 import config from '../../config'
 
@@ -10,10 +11,19 @@ export const register = (name, email, password) => {
         axios.post(URL, {name, email, password})
             .then(res => {
                 dispatch({ type: 'REGISTER_REGISTERED_USER' })
+                dispatch(clearForm())
+                dispatch({ type: 'REGISTER_REDIRECT' })
                 dispatch({ type: 'REGISTER_RESET_REDIRECT' })
+                toastr.success('Success', 'User registered')
             }).catch(err => {
-                console.log(err)
+                toastr.error('Error', err.response.data)
         })
+    }
+}
+
+export const clearForm = () => {
+    return {
+        type: 'REGISTER_CLEAR_FORM'
     }
 }
 
