@@ -46,6 +46,7 @@ class UserList extends Component {
         return (
             <div className="container">
                 <h2>Users <small>List</small></h2>
+
                 <table className="table table-hover table-striped">
                     <thead>
                         <tr>

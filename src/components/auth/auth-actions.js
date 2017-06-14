@@ -13,6 +13,7 @@ export const authenticate = (email, password) => {
             .then(res => {
                 dispatch({ type: 'AUTH_USER_AUTHENTICATED', payload: res.data })
             }).catch(err => {
+                console.log(err)
                 toastr.error('Error', err.response.data.message)
         })
     }

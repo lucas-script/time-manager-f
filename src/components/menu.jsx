@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 
 import { logout } from './auth/auth-actions'
 
+import Permission from './permission'
+
 import './layout/style.css'
 
 class Menu extends Component {
@@ -26,11 +28,19 @@ class Menu extends Component {
                         </div>
                         <div id="navbar" className="navbar-collapse collapse">
                             <ul className="nav navbar-nav">
-                                <li><a href="#/tasks">Tasks</a></li>
-                                <li><a href="#/tasks-create"><small>Create</small></a></li>
+                                <Permission allowed={['admin', 'regular']}>
+                                    <li><a href="#/tasks">Tasks</a></li>
+                                </Permission>
+                                <Permission allowed={['admin', 'regular']}>
+                                    <li><a href="#/tasks-create"><small>Create</small></a></li>
+                                </Permission>
                                 <li role="separator" className="divider"></li>
-                                <li><a href="#/users">Users</a></li>
-                                <li><a href="#/users-create"><small>Create</small></a></li>
+                                <Permission allowed={['admin', 'manager']}>
+                                    <li><a href="#/users">Users</a></li>
+                                </Permission>
+                                <Permission allowed={['admin', 'manager']}>
+                                    <li><a href="#/users-create"><small>Create</small></a></li>
+                                </Permission>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
                                 <li><a>Hello {this.props.name} </a></li>

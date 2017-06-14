@@ -3,9 +3,9 @@ import axios from 'axios'
 const INITIAL_STATE = {
     token: null,
     name: '',
-    email: 'manager@gmail.com',
+    email: 'admin@gmail.com',
     password: '123123',
-    showAuthOrRegister: 'auth'
+    role: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,7 +14,7 @@ export default (state = INITIAL_STATE, action) => {
         case 'AUTH_USER_AUTHENTICATED':
             localStorage.setItem('token', action.payload.token)
             axios.defaults.headers.common['token'] = localStorage.getItem('token')
-            return { ...state, token: action.payload.token, name: action.payload.name, email: action.payload.email, password: '' }
+            return { ...state, token: action.payload.token, name: action.payload.name, email: action.payload.email, password: '', role: action.payload.role }
 
         case 'AUTH_TOKEN_EXPIRED':
             localStorage.removeItem('token')
