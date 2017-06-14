@@ -4,6 +4,7 @@ import userListReducer from '../components/user-list/user-list-reducer'
 import userCreateReducer from '../components/user-create/user-create-reducer'
 import userUpdateReducer from '../components/user-update/user-update-reducer'
 import taskListReducer from '../components/task-list/task-list-reducer'
+import taskCreateReducer from '../components/task-create/task-create-reducer'
 import authReducer from '../components/auth/auth-reducer'
 import registerReducer from '../components/register/register-reducer'
 import { reducer as toastrReducer } from 'react-redux-toastr'
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     userCreate: userCreateReducer,
     userUpdate: userUpdateReducer,
     taskList: taskListReducer,
+    taskCreate: taskCreateReducer,
     auth: authReducer,
     register: registerReducer,
     toastr: toastrReducer

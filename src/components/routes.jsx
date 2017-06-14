@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, HashRouter } from 'react-router-dom'
 
-import Task from './task'
 import TaskList from './task-list/task-list'
+import TaskCreate from './task-create/task-create'
 import UserList from './user-list/user-list'
 import UserCreate from './user-create/user-create'
 import UserUpdate from './user-update/user-update'
@@ -20,6 +20,8 @@ export default (props) => (
             <Route exact path="/users-create" component={UserCreate}/>
             <Route exact path="/users-update/:id" component={UserUpdate}/>
             <Route exact path="/tasks" component={TaskList}/>
+            <Route exact path="/tasks-create" component={TaskCreate}/>
+            <Route exact path="/tasks-update/:id" component={UserUpdate}/>
             <Route path="*" to="/home"/>
         </div>
     </HashRouter>

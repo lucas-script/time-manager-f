@@ -46,7 +46,7 @@ class Auth extends Component {
                     <div className="container">
 
                         <div className="col-md-offset-4">
-                            <h3>Time Manager <small>Authentication</small></h3>
+                            <h3>Authentication <small>Time Manager</small></h3>
                         </div>
 
                         <form className="form-horizontal">

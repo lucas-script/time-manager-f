@@ -51,7 +51,7 @@ class Register extends Component {
                     <div className="container">
 
                         <div className="col-md-offset-4">
-                            <h3>Time Manager <small>Register</small></h3>
+                            <h3>Register <small>Join us!</small></h3>
                         </div>
 
                         <form className="form-horizontal">

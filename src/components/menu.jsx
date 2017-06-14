@@ -28,19 +28,31 @@ class Menu extends Component {
                         </div>
                         <div id="navbar" className="navbar-collapse collapse">
                             <ul className="nav navbar-nav">
+
                                 <Permission allowed={['admin', 'regular']}>
-                                    <li><a href="#/tasks">Tasks</a></li>
+                                    <li className="dropdown">
+                                        <a className="dropdown-toggle" data-toggle="dropdown" href="#">Tasks
+                                            <span className="caret"></span></a>
+                                        <ul className="dropdown-menu">
+                                            <li><a href="#/tasks-create">Create</a></li>
+                                            <li><a href="#/tasks">List</a></li>
+                                        </ul>
+                                    </li>
                                 </Permission>
-                                <Permission allowed={['admin', 'regular']}>
-                                    <li><a href="#/tasks-create"><small>Create</small></a></li>
-                                </Permission>
+
                                 <li role="separator" className="divider"></li>
+
                                 <Permission allowed={['admin', 'manager']}>
-                                    <li><a href="#/users">Users</a></li>
+                                    <li className="dropdown">
+                                        <a className="dropdown-toggle" data-toggle="dropdown" href="#">Users
+                                            <span className="caret"></span></a>
+                                        <ul className="dropdown-menu">
+                                            <li><a href="#/users-create">Create</a></li>
+                                            <li><a href="#/users">List</a></li>
+                                        </ul>
+                                    </li>
                                 </Permission>
-                                <Permission allowed={['admin', 'manager']}>
-                                    <li><a href="#/users-create"><small>Create</small></a></li>
-                                </Permission>
+
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
                                 <li><a>Hello {this.props.name} </a></li>

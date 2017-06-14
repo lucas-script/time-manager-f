@@ -21,8 +21,8 @@ class TaskList extends Component {
         return (
             list.map(t => (
                 <tr key={t._id}>
-                    <td>{t.user.email}</td>
                     <td>{t.name}</td>
+                    <td>{t.user.email}</td>
                     <td>{t.date}</td>
                     <td>{t.durationInMin}</td>
                     <td>
@@ -41,12 +41,12 @@ class TaskList extends Component {
     render() {
         return (
             <div className="container">
-                <h2>Users <small>List</small></h2>
+                <h2>Tasks <small>List</small></h2>
                 <table className="table table-hover table-striped">
                     <thead>
                         <tr>
-                            <th>User</th>
                             <th>Name</th>
+                            <th>User</th>
                             <th>Date</th>
                             <th>Duration(m)</th>
                         </tr>
