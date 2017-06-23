@@ -17,6 +17,8 @@ export const onUpdate = (n, e, p ,r, changeP, w, we) => {
         workloadEnable: we
     }
 
+    console.log(u)
+
     return dispatch => {
         axios.put(`${URL}`, u)
             .then(res => {
