@@ -32,3 +32,33 @@ export const onRemove = (id) => {
             })
     }
 }
+
+export const onFilter = (sDate, eDate) => {
+
+    console.log(sDate)
+    console.log(eDate)
+    console.log(`${URL}?sdate=${sDate}&edate=${eDate}`)
+
+    return dispatch => {
+        axios.get(`${URL}?sdate=${sDate}&edate=${eDate}`)
+            .then(res => {
+                dispatch({ type: 'TASK_LIST_FILTERED', payload: res.data.data })
+            }).catch(err => {
+                toastr.error('Error', err.response.data)
+            })
+    }
+}
+
+export const onSDateChanged = (e) => {
+    return {
+        type: 'TASK_LIST_SDATE_CHANGED',
+        payload: e.target.value
+    }
+}
+
+export const onEDateChanged = (e) => {
+    return {
+        type: 'TASK_LIST_EDATE_CHANGED',
+        payload: e.target.value
+    }
+}

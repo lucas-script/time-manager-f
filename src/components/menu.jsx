@@ -55,7 +55,7 @@ class Menu extends Component {
 
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li><a>Hello {this.props.name} </a></li>
+                                <li><a href="#/me">Hello {this.props.name} </a></li>
                                 <li className="logout"><a href="#" onClick={this.props.logout}>Logout</a></li>
                             </ul>
                         </div>
