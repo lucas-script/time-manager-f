@@ -9,9 +9,9 @@
 .none {}
 
 .green {
-    color: #0f0;
+    background-color: #CCFFCC;
 }
 
 .red {
-    color: #f00;
+    background-color: #FF9999;
 }

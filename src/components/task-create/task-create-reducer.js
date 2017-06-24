@@ -2,7 +2,7 @@ const today = new Date().toISOString().slice(0, 10)
 const INITIAL_STATE = {
     name: '',
     date: today,
-    durationInMin: 0,
+    durationInMin: '',
     redirectToList: false
 }
 

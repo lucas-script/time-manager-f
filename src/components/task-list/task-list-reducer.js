@@ -1,7 +1,9 @@
 const INITIAL_STATE = {
     list: [],
     sDate: '',
-    eDate: ''
+    eDate: '',
+    workloadsMap: {},
+    tasksSumMap: {}
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -14,7 +16,6 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state }
 
         case 'TASK_LIST_FILTERED':
-            console.log('task list filtered')
             return { ...state, list: action.payload }
 
         case 'TASK_LIST_SDATE_CHANGED':
@@ -22,6 +23,12 @@ export default (state = INITIAL_STATE, action) => {
 
         case 'TASK_LIST_EDATE_CHANGED':
             return { ...state, eDate: action.payload }
+
+        case 'TASK_LIST_LOAD_WORKLOADS':
+            return { ...state, workloadsMap: action.payload }
+
+        case 'TASK_LIST_LOAD_TASKS_SUM':
+            return { ...state, tasksSumMap: action.payload }
 
         default:
             return state

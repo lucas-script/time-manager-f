@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { onSearch, onRemove, onFilter, onSDateChanged, onEDateChanged } from './task-list-actions'
+import { onSearch, onRemove, onFilter, onSDateChanged, onEDateChanged, loadWorkloads, loadTasksSum } from './task-list-actions'
 import { formatDate } from '../../util/format'
 
 class TaskList extends Component {
@@ -15,17 +15,43 @@ class TaskList extends Component {
 
     componentWillMount() {
         this.props.onSearch()
+        this.props.loadWorkloads()
+        this.props.loadTasksSum()
     }
 
     formatDate(d) {
         return formatDate(d)
     }
 
+    rowColor(u, dt) {
+        let hasWorkloadEnable = this.props.workloadsMap.find(e => {
+            return e.key === u
+        })
+
+        // workload disabled
+        if (!hasWorkloadEnable) return 'none'
+        // user workload
+        let workload = hasWorkloadEnable.value
+
+        // tasksSum key
+        let key = `${u}_${dt}`
+        let tasksSum = this.props.tasksSumMap.find(e => {
+            return e.key === key
+        })
+
+        let sum = tasksSum.value
+        if (sum >= workload) {
+            return 'green'
+        } else {
+            return 'red'
+        }
+    }
+
     renderRows() {
         const list = this.props.list || []
         return (
             list.map(t => (
-                <tr key={t._id} className="">
+                <tr key={t._id} className={this.rowColor(t.user._id, this.formatDate(t.date))}>
                     <td>{t.name}</td>
                     <td>{t.user.email}</td>
                     <td>{this.formatDate(t.date)}</td>
@@ -58,7 +84,7 @@ class TaskList extends Component {
                     </div>
                     <button className="btn btn-primary" onClick={() => this.props.onFilter(this.props.sDate, this.props.eDate)}>Filter</button>
                 </div>
-                <table className="table table-hover table-striped">
+                <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -79,9 +105,13 @@ class TaskList extends Component {
 const mapStateToProps = (state) => ({
     list: state.taskList.list,
     sDate: state.taskList.sDate,
-    eDate: state.taskList.eDate
+    eDate: state.taskList.eDate,
+    workloadsMap: state.taskList.workloadsMap,
+    tasksSumMap: state.taskList.tasksSumMap
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ onSearch, onRemove, onFilter, onSDateChanged, onEDateChanged }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({
+    onSearch, onRemove, onFilter, onSDateChanged, onEDateChanged, loadWorkloads, loadTasksSum
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList)
