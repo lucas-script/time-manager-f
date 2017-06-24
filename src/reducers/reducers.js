@@ -9,6 +9,7 @@ import taskUpdateReducer from '../components/task-update/task-update-reducer'
 import authReducer from '../components/auth/auth-reducer'
 import registerReducer from '../components/register/register-reducer'
 import meReducer from '../components/me/me-reducer'
+import reportReducer from '../components/report/report-reducer'
 import { reducer as toastrReducer } from 'react-redux-toastr'
 
 const rootReducer = combineReducers({
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     register: registerReducer,
     me: meReducer,
+    report: reportReducer,
     toastr: toastrReducer
 })
 

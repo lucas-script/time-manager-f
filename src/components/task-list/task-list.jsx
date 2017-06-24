@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { onSearch, onRemove, onFilter, onSDateChanged, onEDateChanged } from './task-list-actions'
 import { formatDate } from '../../util/format'
 
-
 class TaskList extends Component {
 
     constructor(props) {
@@ -22,16 +21,11 @@ class TaskList extends Component {
         return formatDate(d)
     }
 
-    filter() {
-        alert('filter date');
-        return
-    }
-
     renderRows() {
         const list = this.props.list || []
         return (
             list.map(t => (
-                <tr key={t._id}>
+                <tr key={t._id} className="">
                     <td>{t.name}</td>
                     <td>{t.user.email}</td>
                     <td>{this.formatDate(t.date)}</td>

@@ -11,6 +11,7 @@ import Auth from './auth/auth'
 import Home from './home/home'
 import Register from './register/register'
 import Me from './me/me'
+import Report from './report/report'
 
 export default (props) => (
     <HashRouter>
@@ -25,6 +26,7 @@ export default (props) => (
             <Route exact path="/tasks-create" component={TaskCreate}/>
             <Route exact path="/tasks-update/:id" component={TaskUpdate}/>
             <Route exact path="/me" component={Me}/>
+            <Route exact path="/report" component={Report}/>
             <Route path="*" to="/home"/>
         </div>
     </HashRouter>

@@ -36,6 +36,7 @@ class Menu extends Component {
                                         <ul className="dropdown-menu">
                                             <li><a href="#/tasks-create">Create</a></li>
                                             <li><a href="#/tasks">List</a></li>
+                                            <li><a href="#/report">Report</a></li>
                                         </ul>
                                     </li>
                                 </Permission>
@@ -55,7 +56,7 @@ class Menu extends Component {
 
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li><a href="#/me">Hello {this.props.name} </a></li>
+                                <li><a href="#/me"><i className="fa fa-gears"></i>Hello {this.props.name} </a></li>
                                 <li className="logout"><a href="#" onClick={this.props.logout}>Logout</a></li>
                             </ul>
                         </div>

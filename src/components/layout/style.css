@@ -5,3 +5,13 @@
 .login {
     padding-top: 20px;
 }
+
+.none {}
+
+.green {
+    color: #0f0;
+}
+
+.red {
+    color: #f00;
+}

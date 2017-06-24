@@ -34,11 +34,6 @@ export const onRemove = (id) => {
 }
 
 export const onFilter = (sDate, eDate) => {
-
-    console.log(sDate)
-    console.log(eDate)
-    console.log(`${URL}?sdate=${sDate}&edate=${eDate}`)
-
     return dispatch => {
         axios.get(`${URL}?sdate=${sDate}&edate=${eDate}`)
             .then(res => {
