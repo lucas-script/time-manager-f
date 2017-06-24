@@ -3,8 +3,8 @@ import axios from 'axios'
 const INITIAL_STATE = {
     token: null,
     name: '',
-    email: 'admin@gmail.com',
-    password: '123123',
+    email: '',
+    password: '',
     role: ''
 }
 
