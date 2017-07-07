@@ -27,6 +27,7 @@ class Report extends Component {
     validateForm() {
         let errors = []
         let valid = true
+
         if (!required(this.props.sDate)) { errors.push('Start date is required'); valid=valid&&false }
         if (!required(this.props.eDate)) { errors.push('End date is required'); valid=valid&&false }
         if (!required(this.props.user)) { errors.push('User is required'); valid=valid&&false }

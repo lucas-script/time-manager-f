@@ -19,18 +19,21 @@ class UserList extends Component {
 
     renderRows() {
         const list = this.props.list || []
+        console.log(list)
         return (
-            list.map(u => (
-                <tr key={u._id}>
-                    <td>{u.name}</td>
-                    <td>{u.email}</td>
-                    <td>{u.role}</td>
+            list.map(user => (
+                <tr key={user._id}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.role}</td>
+                    <td>{user.workload}</td>
+                    <td>{user.workloadEnable.toString()}</td>
                     <td>
                         <button className="btn btn-info">
-                            <Link className="fa fa-refresh" to={`/users-update/${u._id}`}>Update</Link>
+                            <Link className="fa fa-refresh" to={`/users-update/${user._id}`}>Update</Link>
                         </button>
                         <button className="btn btn-danger">
-                            <i className="fa fa-trash" onClick={() => this.props.onRemove(u._id)}>Remove</i>
+                            <i className="fa fa-trash" onClick={() => this.props.onRemove(user._id)}>Remove</i>
                         </button>
                     </td>
                 </tr>
@@ -53,6 +56,8 @@ class UserList extends Component {
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Workload</th>
+                            <th>Workload Enable</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

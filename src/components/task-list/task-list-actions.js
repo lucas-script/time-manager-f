@@ -15,8 +15,9 @@ export const onSearch = () => {
         axios.get(`${URL}`)
             .then(res => {
                 dispatch({ type: 'TASK_SEARCHED', payload: res.data.data })
+
             }).catch(err => {
-                toastr.error('Error', err.response.data)
+                if (err.response.data) toastr.error('Error', err.response.data)
             })
     }
 }

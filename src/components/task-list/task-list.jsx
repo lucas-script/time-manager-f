@@ -23,9 +23,9 @@ class TaskList extends Component {
         return formatDate(d)
     }
 
-    rowColor(u, dt) {
-        let hasWorkloadEnable = this.props.workloadsMap.find(e => {
-            return e.key === u
+    rowColor(user, date) {
+        let hasWorkloadEnable = this.props.workloadsMap.find((element) => {
+            return element.key === user
         })
 
         // workload disabled
@@ -34,9 +34,9 @@ class TaskList extends Component {
         let workload = hasWorkloadEnable.value
 
         // tasksSum key
-        let key = `${u}_${dt}`
-        let tasksSum = this.props.tasksSumMap.find(e => {
-            return e.key === key
+        let key = `${user}_${date}`
+        let tasksSum = this.props.tasksSumMap.find((element) => {
+            return element.key === key
         })
 
         let sum = tasksSum.value
@@ -50,18 +50,18 @@ class TaskList extends Component {
     renderRows() {
         const list = this.props.list || []
         return (
-            list.map(t => (
-                <tr key={t._id} className={this.rowColor(t.user._id, this.formatDate(t.date))}>
-                    <td>{t.name}</td>
-                    <td>{t.user.email}</td>
-                    <td>{this.formatDate(t.date)}</td>
-                    <td>{t.durationInMin}</td>
+            list.map((task) => (
+                <tr key={task._id} className={this.rowColor(task.user._id, this.formatDate(task.date))}>
+                    <td>{task.name}</td>
+                    <td>{task.user.email}</td>
+                    <td>{this.formatDate(task.date)}</td>
+                    <td>{task.durationInMin}</td>
                     <td>
                         <button className="btn btn-info">
-                            <Link className="fa fa-refresh" to={`/tasks-update/${t._id}`}>Update</Link>
+                            <Link className="fa fa-refresh" to={`/tasks-update/${task._id}`}>Update</Link>
                         </button>
                         <button className="btn btn-danger">
-                            <i className="fa fa-trash" onClick={() => this.props.onRemove(t._id)}>Remove</i>
+                            <i className="fa fa-trash" onClick={() => this.props.onRemove(task._id)}>Remove</i>
                         </button>
                     </td>
                 </tr>
