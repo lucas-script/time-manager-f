@@ -38,6 +38,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "socket.io-client": "^2.0.3"
   }
 }

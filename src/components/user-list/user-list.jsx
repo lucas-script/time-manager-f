@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import io from 'socket.io-client'
 
 import { onSearch, onRemove } from './user-list-actions'
+
+const socket = io('http://localhost:3000')
 
 class UserList extends Component {
 
@@ -15,6 +18,14 @@ class UserList extends Component {
 
     componentWillMount() {
         this.props.onSearch()
+
+        // the component reference
+        const self = this
+        // gets the event, and refresh the page
+        socket.on('profileUpdated', () => {
+            console.log('event received')
+            self.props.onSearch()
+        })
     }
 
     renderRows() {
