@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { onSearch, onRemove, onFilter, onSDateChanged, onEDateChanged, loadWorkloads, loadTasksSum } from './task-list-actions'
+import { onSearch, onRemove, onFilter, onSDateChanged, onEDateChanged, loadWorkloads, loadTasksSum,
+    onProjectChanged, loadProjects } from './task-list-actions'
 import { formatDate } from '../../util/format'
 
 class TaskList extends Component {
@@ -17,6 +18,7 @@ class TaskList extends Component {
         this.props.onSearch()
         this.props.loadWorkloads()
         this.props.loadTasksSum()
+        this.props.loadProjects()
     }
 
     formatDate(d) {
@@ -56,6 +58,7 @@ class TaskList extends Component {
                     <td>{task.user.email}</td>
                     <td>{this.formatDate(task.date)}</td>
                     <td>{task.durationInMin}</td>
+                    <td>{ (task.project)? task.project.name: '' }</td>
                     <td>
                         <button className="btn btn-info">
                             <Link className="fa fa-refresh" to={`/tasks-update/${task._id}`}>Update</Link>
@@ -65,6 +68,15 @@ class TaskList extends Component {
                         </button>
                     </td>
                 </tr>
+            ))
+        )
+    }
+
+    renderProjects() {
+        let list = this.props.projectList || []
+        return (
+            list.map(p => (
+                <option key={p._id} value={p._id}>{p.name}</option>
             ))
         )
     }
@@ -82,7 +94,14 @@ class TaskList extends Component {
                         <label><small>(End date)</small></label>
                         <input type="date" value={this.props.eDate} onChange={this.props.onEDateChanged} className="form-control"/>
                     </div>
-                    <button className="btn btn-primary" onClick={() => this.props.onFilter(this.props.sDate, this.props.eDate)}>Filter</button>
+                    <div className="form-group">
+                        <label><small>(Project)</small></label>
+                        <select className="form-control" type="text" value={this.props.project} onChange={this.props.onProjectChanged}>
+                            <option key={null} value={null} default></option>
+                            { this.renderProjects() }
+                        </select>
+                    </div>
+                    <button className="btn btn-primary" onClick={() => this.props.onFilter(this.props.sDate, this.props.eDate, this.props.project)}>Filter</button>
                 </div>
                 <table className="table table-hover">
                     <thead>
@@ -90,6 +109,7 @@ class TaskList extends Component {
                             <th>Name</th>
                             <th>User</th>
                             <th>Date</th>
+                            <th>Project</th>
                             <th>Duration(m)</th>
                         </tr>
                     </thead>
@@ -107,11 +127,21 @@ const mapStateToProps = (state) => ({
     sDate: state.taskList.sDate,
     eDate: state.taskList.eDate,
     workloadsMap: state.taskList.workloadsMap,
-    tasksSumMap: state.taskList.tasksSumMap
+    tasksSumMap: state.taskList.tasksSumMap,
+    project: state.taskList.project,
+    projectList: state.taskList.projectList
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    onSearch, onRemove, onFilter, onSDateChanged, onEDateChanged, loadWorkloads, loadTasksSum
+    onSearch,
+    onRemove,
+    onFilter,
+    onSDateChanged,
+    onEDateChanged,
+    loadWorkloads,
+    loadTasksSum,
+    onProjectChanged,
+    loadProjects,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList)

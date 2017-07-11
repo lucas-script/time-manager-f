@@ -9,6 +9,7 @@ const BASE_URL = config.API_URL
 const URL = `${BASE_URL}/tasks`
 const WORKLOADS_URL = `${BASE_URL}/workloads`
 const TASKS_SUM_URL = `${BASE_URL}/workloads/tasksSum`
+const PROJECTS_URL = `${BASE_URL}/projects`
 
 export const onSearch = () => {
     return dispatch => {
@@ -38,9 +39,9 @@ export const onRemove = (id) => {
     }
 }
 
-export const onFilter = (sDate, eDate) => {
+export const onFilter = (sDate, eDate, project) => {
     return dispatch => {
-        axios.get(`${URL}?sdate=${sDate}&edate=${eDate}`)
+        axios.get(`${URL}?sdate=${sDate}&edate=${eDate}&project=${project}`)
             .then(res => {
                 dispatch({ type: 'TASK_LIST_FILTERED', payload: res.data.data })
             }).catch(err => {
@@ -95,5 +96,23 @@ export const onEDateChanged = (e) => {
     return {
         type: 'TASK_LIST_EDATE_CHANGED',
         payload: e.target.value
+    }
+}
+
+export const onProjectChanged = (e) => {
+    return {
+        type: 'TASK_LIST_PROJECT_CHANGED',
+        payload: e.target.value
+    }
+}
+
+export const loadProjects = () => {
+    return dispatch => {
+        axios.get(PROJECTS_URL)
+            .then(res => {
+                dispatch({ type: 'TASK_LIST_PROJECTS_LOADED', payload: res.data.data })
+            }).catch(err => {
+            toastr.error('Error', err.response.data)
+        })
     }
 }

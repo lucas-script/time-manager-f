@@ -1,9 +1,11 @@
 const today = new Date().toISOString().slice(0, 10)
 const INITIAL_STATE = {
     name: '',
+    project: '',
     date: today,
     durationInMin: '',
-    redirectToList: false
+    redirectToList: false,
+    projectList: []
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -24,11 +26,17 @@ export default (state = INITIAL_STATE, action) => {
         case 'TASK_CREATE_DURATION_CHANGED':
             return { ...state, durationInMin: action.payload }
 
+        case 'TASK_CREATE_PROJECT_CHANGED':
+            return { ...state, project: action.payload }
+
         case 'TASK_CREATE_REDIRECT':
             return { ...state, redirectToList: true }
 
         case 'TASK_CREATE_REDIRECT_RESET':
             return { ...state, redirectToList: false }
+
+        case 'TASK_CREATED_PROJECTS_LOADED':
+            return { ...state, projectList: action.payload }
 
         default:
             return state

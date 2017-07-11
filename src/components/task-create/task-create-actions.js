@@ -5,13 +5,15 @@ import config from '../../config'
 
 const BASE_URL = config.API_URL
 const URL = `${BASE_URL}/tasks`
+const PROJECTS_URL = `${BASE_URL}/projects`
 
-export const onCreate = (n, dt, d) => {
+export const onCreate = (n, dt, d, project) => {
 
     const t = {
         name: n,
         date: dt,
-        durationInMin: d
+        durationInMin: d,
+        project: project
     }
 
     return dispatch => {
@@ -21,6 +23,17 @@ export const onCreate = (n, dt, d) => {
             dispatch(redirect())
             toastr.success('Success', 'Task created')
         }).catch(err => {
+            toastr.error('Error', err.response.data)
+        })
+    }
+}
+
+export const loadProjects = () => {
+    return dispatch => {
+        axios.get(PROJECTS_URL)
+            .then(res => {
+                dispatch({ type: 'TASK_CREATED_PROJECTS_LOADED', payload: res.data.data })
+            }).catch(err => {
             toastr.error('Error', err.response.data)
         })
     }
@@ -54,6 +67,13 @@ export const onDateChanged = (e) => {
 export const onDurationChanged = (e) => {
     return {
         type: 'TASK_CREATE_DURATION_CHANGED',
+        payload: e.target.value
+    }
+}
+
+export const onProjectChanged = (e) => {
+    return {
+        type: 'TASK_CREATE_PROJECT_CHANGED',
         payload: e.target.value
     }
 }

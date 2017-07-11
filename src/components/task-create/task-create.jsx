@@ -9,13 +9,19 @@ import { required } from '../../util/validate'
 import { onCreate,
     onNameChanged,
     onDateChanged,
-    onDurationChanged } from './task-create-actions'
+    onDurationChanged,
+    onProjectChanged,
+    loadProjects} from './task-create-actions'
 
 class TaskCreate extends Component {
 
     constructor(props) {
         super(props)
         this.clickHandler = this.clickHandler.bind(this)
+    }
+
+    componentWillMount() {
+        this.props.loadProjects()
     }
 
     validateForm() {
@@ -32,10 +38,19 @@ class TaskCreate extends Component {
 
     clickHandler() {
         if (this.validateForm()) {
-            this.props.onCreate(this.props.name, this.props.date, this.props.durationInMin)
+            this.props.onCreate(this.props.name, this.props.date, this.props.durationInMin, this.props.project)
         } else {
             return false
         }
+    }
+
+    renderProjects() {
+        let list = this.props.projectList || []
+        return (
+            list.map(p => (
+                <option key={p._id} value={p._id}>{p.name}</option>
+            ))
+        )
     }
 
     render() {
@@ -58,6 +73,14 @@ class TaskCreate extends Component {
                             <div className="col-md-offset-4 col-md-4">
                                 <input id="name" className="form-control" placeholder="Name *" value={this.props.name}
                                        onChange={this.props.onNameChanged}></input>
+                            </div>
+                            <div className="col-md-8"></div>
+                            <div className="col-md-offset-4 col-md-4">
+                                <label><small>Project</small></label>
+                                <select className="form-control" type="text" value={this.props.project} onChange={this.props.onProjectChanged}>
+                                    <option key={null} value={null} default></option>
+                                    { this.renderProjects() }
+                                </select>
                             </div>
                             <div className="col-md-8"></div>
                             <div className="col-md-offset-4 col-md-4">
@@ -85,7 +108,9 @@ class TaskCreate extends Component {
 
 const mapStateToProps = state => ({
     name: state.taskCreate.name,
+    project: state.taskCreate.project,
     date: state.taskCreate.date,
+    projectList: state.taskCreate.projectList,
     durationInMin: state.taskCreate.durationInMin,
     redirectToList: state.taskCreate.redirectToList,
     token: state.auth.token
@@ -96,6 +121,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     onNameChanged,
     onDateChanged,
     onDurationChanged,
+    onProjectChanged,
+    loadProjects,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskCreate)
