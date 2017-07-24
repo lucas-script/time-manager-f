@@ -19,6 +19,7 @@ class TaskList extends Component {
         this.props.loadWorkloads()
         this.props.loadTasksSum()
         this.props.loadProjects()
+        this.props.loadProjects()
     }
 
     formatDate(d) {
@@ -58,7 +59,7 @@ class TaskList extends Component {
                     <td>{task.user.email}</td>
                     <td>{this.formatDate(task.date)}</td>
                     <td>{task.durationInMin}</td>
-                    <td>{ (task.project)? task.project.name: '' }</td>
+                    <td>{(task.project)? task.project.name: ''}</td>
                     <td>
                         <button className="btn btn-info">
                             <Link className="fa fa-refresh" to={`/tasks-update/${task._id}`}>Update</Link>
@@ -109,8 +110,8 @@ class TaskList extends Component {
                             <th>Name</th>
                             <th>User</th>
                             <th>Date</th>
-                            <th>Project</th>
                             <th>Duration(m)</th>
+                            <th>Project</th>
                         </tr>
                     </thead>
                     <tbody>
