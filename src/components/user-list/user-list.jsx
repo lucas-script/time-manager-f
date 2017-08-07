@@ -7,7 +7,7 @@ import io from 'socket.io-client'
 
 import { onSearch, onRemove } from './user-list-actions'
 
-const socket = io('http://localhost:3000')
+const socket = io('https://localhost:3000')
 
 class UserList extends Component {
 
